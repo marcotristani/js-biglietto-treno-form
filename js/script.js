@@ -24,6 +24,14 @@ const containerDiscount = document.getElementById("container-discount");
 //collegamento con il finto bottone annulla
 const btnCancel = document.getElementById("btn-cancel");
 
+//imposto numero totali posti, carrozze e creo array codice treno che andrò ad associare allo scalare di posti e carrozze
+const totalNumberPlace = 3;
+let numberPlaceCurrent= 0;
+const totalNumberCarriage = 3;
+let numberCarriageCurrent = 1;
+const initialCodeTiketCurrent = ['AA', 'BB', 'CC', 'DD', 'EE'];
+let index = 0;
+
 //FASE DI ELABORAZIONE
 
 //prendere di dati da input quando viene schiacciato bottone altrimenti al momento del caricamento della pagina i valori degli input saranno vuoti
@@ -54,10 +62,32 @@ form.addEventListener("submit", (event) => {
   //calcolo prezzo finale
   const finalPrice = (price - reduction).toFixed(2); // con to fixed produco una stringa con 2 decimali
 
+
+  
+
+  
+
+  //Pulisco il form dopo aver mandato i dati
+  form.reset();
+  numberPlaceCurrent++;
+  if(numberPlaceCurrent > totalNumberPlace){
+    alert('Posti esauriti in questa carrozza');
+    numberCarriageCurrent++;
+    numberPlaceCurrent = 1;
+  }
+
+    if(numberCarriageCurrent > totalNumberCarriage){
+    alert('Posti esauriti in questo treno');
+    index++;
+    numberCarriageCurrent = 1;
+  }
+
+  
+  
   //FASE DI OUTPUT
-  codeTiket.innerHTML = "AC4F07";
-  numberPlace.innerHTML = 10;
-  numberCarriage.innerHTML = 7;
+  codeTiket.innerHTML = `${initialCodeTiketCurrent[index]}${numberCarriageCurrent}${numberPlaceCurrent}`;
+  numberPlace.innerHTML = numberPlaceCurrent;
+  numberCarriage.innerHTML = numberCarriageCurrent;
   namePassenger.innerHTML = nameUser.value;
   priceTiket.innerHTML = finalPrice;
   if (discount !== "") {
@@ -66,11 +96,6 @@ form.addEventListener("submit", (event) => {
   } else {
     containerDiscount.classList.add("d-none");
   }
-
-  //Pulisco il form dopo aver mandato i dati
-  form.reset();
-
-
 });
   
 
