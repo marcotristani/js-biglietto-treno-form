@@ -5,13 +5,20 @@ const eta = document.getElementById('eta');
 //prendere  collegamento bottone dall'html
 const btnConfirm = document.getElementById('confirm');
 
+//prendo collegamento form
+const form = document.querySelector("form");
+
 //FASE DI ELABORAZIONE
 
 //prendere di dati da input quando viene schiacciato bottone altrimenti al momento del caricamento della pagina i valori degli input saranno vuoti
-btnConfirm.addEventListener("click", () =>{
+form.addEventListener("submit", (event) =>{
+    //Blocco il form dal ricaricare la pagina quando schiaccio il bottone, quindi blocco la sua proprietà di default
+    event.preventDefault();
+
+
     const kmUser = parseFloat(km.value) ;//Prendere da input pagina numero chilometri da percorrere
     const etaUser = parseInt(eta.value);//prendere da input pagina età passeggero
-    console.log( kmUser, etaUser)//verifica acquisizione dati
+    console.log( 'km:',kmUser,'età:', etaUser)//verifica acquisizione dati
 
     // calcolare il prezzo del biglietto = numero kilometri * 0,21 euro
     const price = kmUser * 0.21;
@@ -28,7 +35,7 @@ btnConfirm.addEventListener("click", () =>{
     }
 
     //calcolo prezzo finale
-    const finalPrice = price - reduction;
+    const finalPrice = (price - reduction).toFixed(2);// con to fixed produco una stringa con 2 decimali
     
     //FASE DI OUTPUT
     console.log( 'prezzo finale:',finalPrice, discount);
