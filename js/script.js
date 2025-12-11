@@ -1,10 +1,22 @@
 //FASE DI PREPARAZIONE
 //prendere collegamenti input dall'html
+const km = document.getElementById('km');
+const eta = document.getElementById('eta');
 //prendere  collegamento bottone dall'html
+const btnConfirm = document.getElementById('confirm');
 
 //FASE DI ELABORAZIONE
-//Prendere da input pagina numero chilometri da percorrere
-//prendere da input pagina età passeggero
+
+
+
+
+//prendere di dati da input quando viene schiacciato bottone altrimenti al momento del caricamento della pagina i valori degli input saranno vuoti
+btnConfirm.addEventListener("click", () =>{
+    const kmUser = km.value ;//Prendere da input pagina numero chilometri da percorrere
+    const etaUser = eta.value;//prendere da input pagina età passeggero
+    console.log( kmUser, etaUser)//verifica acquisizione dati
+}  
+)
 
 // calcolare il prezzo del biglietto = numero kilometri * 0,21 euro
 
