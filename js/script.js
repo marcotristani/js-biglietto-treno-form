@@ -7,30 +7,32 @@ const btnConfirm = document.getElementById('confirm');
 
 //FASE DI ELABORAZIONE
 
-
-
-
 //prendere di dati da input quando viene schiacciato bottone altrimenti al momento del caricamento della pagina i valori degli input saranno vuoti
 btnConfirm.addEventListener("click", () =>{
-    const kmUser = km.value ;//Prendere da input pagina numero chilometri da percorrere
-    const etaUser = eta.value;//prendere da input pagina età passeggero
+    const kmUser = parseFloat(km.value) ;//Prendere da input pagina numero chilometri da percorrere
+    const etaUser = parseInt(eta.value);//prendere da input pagina età passeggero
     console.log( kmUser, etaUser)//verifica acquisizione dati
+
+    // calcolare il prezzo del biglietto = numero kilometri * 0,21 euro
+    const price = kmUser * 0.21;
+    let reduction = 0 ;
+    let discount = "";
+7
+    //calcolare sconto
+    if ( etaUser < 18){
+        reduction = price * 0.2;
+        discount = "Sconto 20%";
+    }else if( etaUser >= 65) {
+        reduction = price * 0.4;
+        discount = "Sconto 40%";
+    }
+
+    //calcolo prezzo finale
+    const finalPrice = price - reduction;
+    
+    //FASE DI OUTPUT
+    console.log( 'prezzo finale:',finalPrice, discount);
 }  
 )
 
-// calcolare il prezzo del biglietto = numero kilometri * 0,21 euro
 
-//se età passeggero è minorenne(<18) allora
-     // calcolare sconto da applicare (prezzo biglietto * 0.2)(20% di sconto)
-     // prezzo biglietto ridotto = prezzo biglietto intero - sconto
-                       //OPPURE
-     // prezzo biglietto ridotto = prezzo biglietto *0.8
-
-//se età passeggero è over65(>65) allora
-     // calcolare sconto da applicare (prezzo biglietto * 0.4)(40% di sconto)
-     // prezzo biglietto ridotto = prezzo biglietto intero - sconto
-                       //OPPURE
-     // prezzo biglietto ridotto = prezzo biglietto *0.6
-
-//FASE DI OUTPUT
-//Quando viene fatto click sul bottone stampo il prezzo finale del biglietto con un console.log
