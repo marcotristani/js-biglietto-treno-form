@@ -24,6 +24,9 @@ const containerDiscount = document.getElementById("container-discount");
 //collegamento con il finto bottone annulla
 const btnCancel = document.getElementById("btn-cancel");
 
+//collegamento tempo
+const time = document.getElementById("time");
+
 //imposto numero totali posti, carrozze e creo array codice treno che andrò ad associare allo scalare di posti e carrozze
 const totalNumberPlace = 3;
 let numberPlaceCurrent= 0;
@@ -89,13 +92,26 @@ form.addEventListener("submit", (event) => {
   numberPlace.innerHTML = numberPlaceCurrent;
   numberCarriage.innerHTML = numberCarriageCurrent;
   namePassenger.innerHTML = nameUser.value;
-  priceTiket.innerHTML = finalPrice;
+  priceTiket.innerHTML = `${finalPrice} &euro;`;
   if (discount !== "") {
     containerDiscount.classList.remove("d-none");
     discountParagraph.innerHTML = `${etaUser}<div class="text-danger"> ${discount}</div>`;
   } else {
     containerDiscount.classList.add("d-none");
   }
+
+  //TEMPO AL MOMENTO DELLA CONFERMA DEL BIGLIETTO
+  const currentTime = new Date();
+  const currentHours = currentTime.getHours();
+  const currentMinutes = currentTime.getMinutes();
+  const currentSeconds = currentTime.getSeconds();
+  const currentDate = currentTime.getDate();
+  const currentMonth = currentTime.getMonth() + 1;
+  const currentYear = currentTime.getFullYear();
+
+  time.innerHTML = `${currentHours}:${currentMinutes}:${currentSeconds}<br>${currentDate}/${currentMonth}/${currentYear}`;
+  console.log(`${currentDate}/${currentMonth}/${currentYear}<`);
+
 });
   
 
