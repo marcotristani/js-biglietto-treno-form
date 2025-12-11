@@ -9,6 +9,9 @@ const btnConfirm = document.getElementById("confirm");
 //prendo collegamento form
 const form = document.querySelector("form");
 
+//collegamento con la card che contiene il tiket
+const containerTiket = document.getElementById("container-tiket");
+
 //prendo collegamento output
 const namePassenger = document.getElementById("name-passenger");
 const codeTiket = document.getElementById("code-tiket");
@@ -18,12 +21,18 @@ const discountParagraph = document.getElementById("discount");
 const priceTiket = document.getElementById("price-tiket");
 const containerDiscount = document.getElementById("container-discount");
 
+//collegamento con il finto bottone annulla
+const btnCancel = document.getElementById("btn-cancel");
+
 //FASE DI ELABORAZIONE
 
 //prendere di dati da input quando viene schiacciato bottone altrimenti al momento del caricamento della pagina i valori degli input saranno vuoti
 form.addEventListener("submit", (event) => {
   //Blocco il form dal ricaricare la pagina quando schiaccio il bottone, quindi blocco la sua proprietà di default
   event.preventDefault();
+
+  //faccio apparire la card che contiene il tiket quando vengono mandati i dati
+  containerTiket.classList.remove("d-none");
 
   const kmUser = parseFloat(km.value); //Prendere da input pagina numero chilometri da percorrere
   const etaUser = eta.value; //prendere da input pagina età passeggero
@@ -46,16 +55,27 @@ form.addEventListener("submit", (event) => {
   const finalPrice = (price - reduction).toFixed(2); // con to fixed produco una stringa con 2 decimali
 
   //FASE DI OUTPUT
-  codeTiket.innerHTML = 'AC4F07';
+  codeTiket.innerHTML = "AC4F07";
   numberPlace.innerHTML = 10;
   numberCarriage.innerHTML = 7;
   namePassenger.innerHTML = nameUser.value;
   priceTiket.innerHTML = finalPrice;
-  if(discount !== ""){
+  if (discount !== "") {
     containerDiscount.classList.remove("d-none");
-    discountParagraph.innerHTML = `${etaUser }<div class="text-danger"> ${discount}</div>` ;
-  }else {
+    discountParagraph.innerHTML = `${etaUser}<div class="text-danger"> ${discount}</div>`;
+  } else {
     containerDiscount.classList.add("d-none");
   }
-  console.log("prezzo finale:", finalPrice, discount);
+
+  //Pulisco il form dopo aver mandato i dati
+  form.reset();
+
+
 });
+  
+
+//creo evento per quando clicco sul finto bottone annulla
+  btnCancel.addEventListener("click", () => {
+    form.reset();
+    containerTiket.classList.add("d-none");
+  });
